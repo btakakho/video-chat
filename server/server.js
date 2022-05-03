@@ -37,6 +37,14 @@ io.on('connection', (socket) => {
   }
   console.log(1, connectedUsers)
 
+  socket.on('chat-offer', ({ userId, chatType }) => {
+    if (!connectedUsers[userId]) return
+
+    const data = { userId: socket.id, chatType }
+
+    io.to(userId).emit('chat-offer', data)
+  })
+
   socket.on('disconnect', () => {
     console.log('2 disconnected', socket.id)
     delete connectedUsers[socket.id]
