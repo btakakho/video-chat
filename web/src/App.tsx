@@ -55,6 +55,8 @@ function App() {
 
   const webRTC = {
     handleChatOffer({ userId, chatType }: any) {
+      console.log('userId')
+
       onOpen()
     },
   }
@@ -312,6 +314,7 @@ function App() {
         onClose={onClose}
         isCentered
         closeOnOverlayClick={false}
+        closeOnEsc={false}
       >
         <ModalOverlay backdropFilter="blur(15px)" />
         <ModalContent>
