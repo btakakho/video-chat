@@ -29,11 +29,20 @@ const io = new Server(server, {
 
 let interval
 
+const connectedUsers = {}
+
 io.on('connection', (socket) => {
-  console.log('New client connected', socket.id)
+  connectedUsers[socket.id] = {
+    id: socket.id,
+  }
+  console.log(1, connectedUsers)
 
   socket.on('disconnect', () => {
-    console.log(`Client #${socket.id} disconnected`)
+    console.log('2 disconnected', socket.id)
+    delete connectedUsers[socket.id]
+
+    console.log(3, connectedUsers)
+
     clearInterval(interval)
   })
 })
